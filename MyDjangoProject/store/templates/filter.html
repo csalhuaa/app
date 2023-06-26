@@ -1,0 +1,22 @@
+{% block filter %}
+<!-- Filtros -->
+<form method="GET" action="{% url 'products' %}">
+    <!-- Campo de entrada para el nombre -->
+    <input type="text" name="name" value="{{ request.GET.name }}">
+
+    <!-- Campos de entrada para el precio mínimo y máximo -->
+    <input type="number" name="min_price" step="0.01" min="0" placeholder="Precio mínimo"
+        value="{{ request.GET.min_price }}">
+    <input type="number" name="max_price" step="0.01" min="0" placeholder="Precio máximo"
+        value="{{ request.GET.max_price }}">
+
+    <!-- Campo de selección para la categoría -->
+    <select name="category">
+        <option value="">Todas las categorías</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+{% endblock %}
