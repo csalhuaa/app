@@ -15,29 +15,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
+from rest_framework import routers
+from store import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
-
-# Use include() to add paths from the catalog application
-from django.urls import include
-
-urlpatterns += [
     path('store/', include('store.urls')),
-]
-
-#Add URL maps to redirect the base URL to our application
-from django.views.generic import RedirectView
-urlpatterns += [
     path('', RedirectView.as_view(url='store/', permanent=True)),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
-# Use static() to add URL mapping to serve static files during development (only)
-from django.conf import settings
-from django.conf.urls.static import static
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+
+urlpatterns += [
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

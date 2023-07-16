@@ -7,17 +7,19 @@
         {% include 'filter.html' %}
     {% endblock %}
     <!-- Productos -->
-    <ul>
+     <div class="row">
         {% for product in products %}
-        <li>
-            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-            <p>Precio: ${{ product.price }}</p>
-            <p>Categoría: {{ product.category }}</p>
-            <!-- Agrega aquí otros detalles del producto que desees mostrar -->
-        </li>
+            <div class="col-sm-3">
+                <div class="card mb-4">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <a href="{{ product.get_absolute_url }}" class="card-title">{{ product.name }}</a>
+                        <p class="card-text">Precio: ${{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
         {% empty %}
-        <li>No se encontraron productos.</li>
+            <p>No se encontraron productos.</p>
         {% endfor %}
-    </ul>
-
+    </div>
 {% endblock %}
