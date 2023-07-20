@@ -1,0 +1,135 @@
+/* Estilos para el <nav> */
+nav.main-nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: relative;
+}
+
+div.left-links {
+    display: flex;
+    align-items: center;
+}
+
+.left-links.active {
+    display: block;
+}
+
+div.right-links {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.right-links.active {
+    display: block;
+}
+
+nav.main-nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+nav span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+nav.main-nav a:hover {
+    color: #f8e71c;
+}
+
+nav a.logout-link {
+    color: #ff5733;
+}
+
+/* estilos para la descripcion de seccion */
+span.msg {
+    position: absolute;
+    top: -20px;
+    font-size: 14px;
+    margin-left: 20px;
+    font-style: italic;
+}
+
+div.personal-space {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.personal-space.active {
+    display: block;
+}
+
+div.user-links {
+    display: flex;
+    align-items: center;
+}
+
+.user-links.active {
+    display: block;
+}
+
+/* linea divisora */
+div.user-links::before {
+    content: "";
+    border-right: 1px solid #ccc;
+    height: 20px;
+    margin-right: 20px;
+}
+
+/* estilos para el boton del menu contraido */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav.main-nav {
+        flex-direction: column;
+    }
+
+    div.left-links,
+    div.right-links {
+        margin-top: 10px;
+    }
+
+    /* Estilos para el botón del menú contraído */
+    .menu-btn {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    div.left-links,
+    div.personal-space,
+    div.user-links {
+        display: none;
+        flex-direction: column;
+    }
+
+    .right-links.active,
+    .left-links.active {
+        display: flex;
+    }
+
+    nav a {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    /* estilos para mostrar los enlaces */
+    .menu-btn.active~div.right-links {
+        display: flex;
+        flex-direction: column;
+    }
+}
